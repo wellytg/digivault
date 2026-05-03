@@ -6,7 +6,7 @@
 const CONFIG = {
   // === API KEYS ===
   // Get your free key at https://aistudio.google.com/
-  GEMINI_API_KEY: 'YOUR_GEMINI_API_KEY_HERE',
+  GEMINI_API_KEY: 'AIzaSyBZP50wB_E7jTXpxjSrR30Dek8uw20xSfI',
 
   // === FEATURE FLAGS ===
   USE_MOCK_DATA: false,        // Set true to force mock data (demo safety net)
