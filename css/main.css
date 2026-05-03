@@ -217,6 +217,44 @@ button:active {
     text-transform: uppercase;
 }
 
+/* --- Verified Recon Cards --- */
+
+.recon-card-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.recon-card-wrapper.verified .recon-card {
+    border-color: var(--danger);
+    background: rgba(255, 68, 68, 0.05);
+}
+
+.verify-btn {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.75rem;
+    padding: 0.4rem;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    transition: all 0.2s;
+}
+
+.verify-btn:hover {
+    border-color: var(--text);
+    color: var(--text);
+}
+
+.recon-card-wrapper.verified .verify-btn {
+    background: var(--danger);
+    color: white;
+    border-color: var(--danger);
+}
+
 /* --- Breach Cards --- */
 
 .breach-cards-container {

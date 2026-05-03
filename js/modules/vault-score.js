@@ -13,23 +13,33 @@ function calculateDigiScore(reconResults, breachResults) {
     let score = 100;
 
     // 1. Breach penalty (40% weight = max 40 points)
-    // Penalty is higher for more breaches, capping at 40 points.
     const breachPenalty = Math.min(breachResults.length * 8, 40);
     score -= breachPenalty;
 
     // 2. Profile visibility penalty (30% weight = max 30 points)
-    // More visible profiles across social/search platforms reduce the score.
-    const totalProfiles = reconResults.social.length + reconResults.search.length;
-    const profilePenalty = Math.min(totalProfiles * 3, 30);
+    // Verified profiles = 6 points each
+    // Unverified/Search results = 2 points each
+    const verifiedCount = [
+        ...reconResults.social, 
+        ...reconResults.search, 
+        ...reconResults.dataBrokers
+    ].filter(p => p.verified).length;
+
+    const unverifiedCount = [
+        ...reconResults.social, 
+        ...reconResults.search
+    ].filter(p => !p.verified).length;
+
+    const profilePenalty = Math.min((verifiedCount * 6) + (unverifiedCount * 2), 30);
     score -= profilePenalty;
 
     // 3. Data broker presence (20% = 20 points)
-    // For this MVP, we assume a base penalty if any data broker links are generated.
-    const brokerPenalty = reconResults.dataBrokers.length > 0 ? 20 : 0;
+    // If any data broker is verified, max penalty.
+    const verifiedBrokers = reconResults.dataBrokers.filter(p => p.verified).length;
+    const brokerPenalty = verifiedBrokers > 0 ? 20 : (reconResults.dataBrokers.length > 0 ? 10 : 0);
     score -= brokerPenalty;
 
     // 4. Email exposure (10% = 10 points)
-    // Small penalty if the email has ever appeared in a breach.
     const emailExposurePenalty = breachResults.length > 0 ? 10 : 0;
     score -= emailExposurePenalty;
 

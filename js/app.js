@@ -52,6 +52,14 @@ async function handleScan(e) {
 
         // Step 4: Render results
         updateScanStatus('Compiling security report...');
+        
+        // Save results to window for verification re-calculation
+        window.currentBreachResults = breachResults;
+        window.updateLiveScore = () => {
+            const newScore = calculateDigiScore(window.currentReconResults, window.currentBreachResults);
+            renderDigiScore(newScore);
+        };
+
         renderRecon(reconResults);
         renderBreachReport(breachResults);
         renderDigiScore(score);
