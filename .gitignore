@@ -1,16 +1,36 @@
-# Environment
-.env
-.env.local
-.env.*.local
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
 
-# Dependencies
-node_modules/
-dist/
-build/
-
-# IDE
+# Editor directories
 .vscode/
 .idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment / secrets (NEVER commit real API keys)
+.env
+.env.local
+.env.*
+!.env.example
+
+# Dependencies (should never exist but guard against it)
+node_modules/
+package-lock.json
+
+# Build output (not applicable but defensive)
+dist/
+build/
+.next/
+
+# Claude Code working files
+.claude/
+__pycache__/
 
 # AI/Context (Protocols)
 .llm_history/
