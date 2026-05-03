@@ -22,7 +22,6 @@ const API = {
             const response = await fetch(url);
             
             if (response.status === 404) {
-                // 404 means no breaches found - this is a success state for the user!
                 return [];
             }
             
@@ -52,65 +51,62 @@ const API = {
     },
 
     /**
-     * Calls Anthropic API with streaming response.
+     * Calls Google Gemini API with streaming response.
+     * Handles the complex JSON-array stream format used by Gemini REST.
      * @param {string} prompt 
      * @param {Function} onDelta - Callback for each text chunk
      */
-    async callClaudeStreaming(prompt, onDelta) {
-        if (!CONFIG.ENABLE_AI_REPORT || CONFIG.ANTHROPIC_API_KEY === 'YOUR_ANTHROPIC_API_KEY_HERE') {
-            onDelta("AI Report is disabled or API key is missing. Please check config.js.");
+    async callGeminiStreaming(prompt, onDelta) {
+        if (!CONFIG.ENABLE_AI_REPORT || CONFIG.GEMINI_API_KEY === 'YOUR_GEMINI_API_KEY_HERE') {
+            onDelta("AI Report is disabled or Gemini API key is missing. Please check config.js.");
             return;
         }
 
         try {
-            const response = await fetch(CONFIG.ANTHROPIC_API, {
+            const response = await fetch(`${CONFIG.GEMINI_API}?key=${CONFIG.GEMINI_API_KEY}`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'x-api-key': CONFIG.ANTHROPIC_API_KEY,
-                    'anthropic-version': '2023-06-01',
-                    'anthropic-dangerous-direct-browser-access': 'true'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    model: CONFIG.CLAUDE_MODEL,
-                    max_tokens: 600,
-                    stream: true,
-                    messages: [{ role: 'user', content: prompt }]
+                    contents: [{ parts: [{ text: prompt }] }]
                 })
             });
 
             if (!response.ok) {
                 const errorData = await response.json();
-                throw new Error(errorData.error?.message || "Claude API error");
+                throw new Error(errorData.error?.message || "Gemini API error");
             }
 
             const reader = response.body.getReader();
             const decoder = new TextDecoder();
             let buffer = '';
+            let lastProcessedIndex = 0;
 
             while (true) {
                 const { done, value } = await reader.read();
                 if (done) break;
                 
-                buffer += decoder.decode(value);
-                const lines = buffer.split('\n');
-                buffer = lines.pop();
-
-                for (const line of lines) {
-                    if (line.startsWith('data: ')) {
-                        const data = line.slice(6);
-                        if (data === '[DONE]') return;
+                buffer += decoder.decode(value, { stream: true });
+                
+                // Gemini returns a JSON array: [ {chunk}, {chunk} ]
+                // We extract text from new candidates as they appear in the buffer
+                const regex = /"text":\s*"((?:[^"\\]|\\.)*)"/g;
+                let match;
+                let matchIndex = 0;
+                
+                while ((match = regex.exec(buffer)) !== null) {
+                    if (matchIndex >= lastProcessedIndex) {
+                        // Extract and unescape the text chunk
+                        const text = match[1]
+                            .replace(/\\n/g, '\n')
+                            .replace(/\\r/g, '\r')
+                            .replace(/\\t/g, '\t')
+                            .replace(/\\"/g, '"')
+                            .replace(/\\\\/g, '\\');
                         
-                        try {
-                            const parsed = JSON.parse(data);
-                            if (parsed.type === 'content_block_delta') {
-                                const text = parsed.delta?.text || '';
-                                onDelta(text);
-                            }
-                        } catch (e) {
-                            // Ignore partial JSON
-                        }
+                        onDelta(text);
+                        lastProcessedIndex++;
                     }
+                    matchIndex++;
                 }
             }
         } catch (error) {

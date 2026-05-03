@@ -38,9 +38,9 @@ Public profiles visibility: ${recon.social.length + recon.search.length} major p
 
 Return ONLY a numbered list of 5 recommendations. Be specific, practical, and prioritise by urgency. No preamble.`;
 
-    await API.callClaudeStreaming(prompt, (delta) => {
-        contentBox.innerText += delta;
-        // Scroll to bottom as it streams
-        container.scrollIntoView({ behavior: 'smooth', block: 'end' });
-    });
+await API.callGeminiStreaming(prompt, (delta) => {
+    contentBox.innerText += delta;
+    // Scroll to bottom as it streams
+    container.scrollIntoView({ behavior: 'smooth', block: 'end' });
+});
 }

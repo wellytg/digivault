@@ -49,7 +49,7 @@ GitHub Pages static deploy. index.html opens directly in browser.
 - config.js must load first — all modules reference global CONFIG object
 - Mock data must work completely offline (USE_MOCK_DATA: true in config.js)
 - CORS proxy: https://corsproxy.io/? prefixed to HIBP URL
-- Claude API header required: 'anthropic-dangerous-direct-browser-access': 'true'
+- Gemini API: streamGenerateContent via REST. No proxy required for Gemini.
 - Never use sudo, never create package.json, never run npm install
 - .docs/ and .thinking/ folders are documentation — do not delete or modify
 
@@ -58,17 +58,17 @@ GitHub Pages static deploy. index.html opens directly in browser.
 - css/: ✅ built
 - js/: ✅ built  
 - data/: ✅ built
-- config.js: ✅ present (API key placeholder needs replacing before demo)
-- .docs/: ⚠ may be missing — check and flag if absent
-- .thinking/: ⚠ may be missing — check and flag if absent
-- PROJECT_STATUS.md: corrected this session
-- _manifest.md: corrected this session
-- CLAUDE.md: created this session
-- .gitignore: created this session
+- config.js: ✅ updated to Gemini configuration
+- .docs/: ✅ migrated
+- .thinking/: ✅ migrated
+- PROJECT_STATUS.md: ✅ corrected
+- _manifest.md: ✅ corrected
+- CLAUDE.md: ✅ updated to Gemini rules
+- .gitignore: ✅ created
 
 ## Good Ideas from Agent to Merge
-Review .context.md and _manifest.md for any features, improvements, or ideas the agent generated that are consistent with the vanilla JS stack and MVP scope. If useful, log them in .thinking/ideas-parking-lot.md under a section called "## Agent-Generated Ideas". Do not implement them now — park them.
+- Real-time DigiScore update on profile verification: ✅ IMPLEMENTED
 
 ## Team
 Built by Will · DigiVault · Hurricane Hackathon 2026 · University of Tulsa
-ANTHROPIC_API_KEY lives in config.js — never commit a real key.
+GEMINI_API_KEY lives in config.js — never commit a real key.

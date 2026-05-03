@@ -5,17 +5,17 @@
 
 const CONFIG = {
   // === API KEYS ===
-  ANTHROPIC_API_KEY: 'YOUR_ANTHROPIC_API_KEY_HERE',
+  // Get your free key at https://aistudio.google.com/
+  GEMINI_API_KEY: 'YOUR_GEMINI_API_KEY_HERE',
 
   // === FEATURE FLAGS ===
   USE_MOCK_DATA: false,        // Set true to force mock data (demo safety net)
-  ENABLE_AI_REPORT: true,      // Set false to skip Claude API call
+  ENABLE_AI_REPORT: true,      // Set false to skip AI API call
 
   // === API ENDPOINTS ===
   CORS_PROXY: 'https://corsproxy.io/?',
   HIBP_BASE: 'https://haveibeenpwned.com/api/v3',
-  ANTHROPIC_API: 'https://api.anthropic.com/v1/messages',
-  CLAUDE_MODEL: 'claude-sonnet-4-20250514',
+  GEMINI_API: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:streamGenerateContent',
 
   // === APP META ===
   APP_NAME: 'DigiVault',
