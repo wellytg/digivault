@@ -1,0 +1,107 @@
+/**
+ * vault-score.css
+ * Styling for the DigiScore (formerly VaultScore) badge and threat indicators.
+ */
+
+.score-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 3rem;
+    border-radius: var(--radius);
+    text-align: center;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.score-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.score-circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 8px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    transition: transform 0.3s ease;
+}
+
+.score-circle:hover {
+    transform: scale(1.05);
+}
+
+#score-value {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.score-max {
+    font-size: 1rem;
+    color: var(--muted);
+}
+
+/* --- Threat Levels --- */
+
+.threat-badge {
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 800;
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+}
+
+/* LOW RISK */
+.low {
+    border-color: var(--accent) !important;
+    color: var(--accent);
+}
+.threat-badge.low {
+    background: rgba(0, 255, 136, 0.1);
+    border: 1px solid var(--accent);
+}
+
+/* MEDIUM RISK */
+.medium {
+    border-color: var(--warning) !important;
+    color: var(--warning);
+}
+.threat-badge.medium {
+    background: rgba(255, 170, 0, 0.1);
+    border: 1px solid var(--warning);
+}
+
+/* HIGH RISK */
+.high {
+    border-color: var(--danger) !important;
+    color: var(--danger);
+}
+.threat-badge.high {
+    background: rgba(255, 68, 68, 0.1);
+    border: 1px solid var(--danger);
+}
+
+/* CRITICAL RISK */
+.critical {
+    border-color: var(--critical) !important;
+    color: var(--critical);
+}
+.threat-badge.critical {
+    background: rgba(255, 0, 85, 0.1);
+    border: 1px solid var(--critical);
+}
+
+.score-description {
+    max-width: 600px;
+    margin: 0 auto;
+    color: var(--muted);
+}

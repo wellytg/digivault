@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DigiVault | Know Your Digital Self</title>
+    
+    <!-- CSS Imports -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/vault-score.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+
+    <!-- SECTION 1: Landing / Hero -->
+    <section id="landing">
+        <div class="logo">DigiVault</div>
+        <h1>What does the world see when they search you?</h1>
+        
+        <form id="scan-form">
+            <input id="input-name" type="text" placeholder="Full Name" required>
+            <input id="input-email" type="email" placeholder="Email Address" required>
+            <button type="submit">Run DigiScan</button>
+        </form>
+    </section>
+
+    <!-- SECTION 2: Scanning Phase -->
+    <section id="scanning" hidden>
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+        <p id="scan-status">Initialising secure scan...</p>
+    </section>
+
+    <!-- SECTION 3: Results Dashboard -->
+    <section id="results" hidden>
+        <!-- Security Rating / DigiScore -->
+        <div id="vault-score-container" class="fade-in"></div>
+
+        <!-- Public Face Scan Results -->
+        <div id="public-face" class="fade-in" style="animation-delay: 0.2s;"></div>
+
+        <!-- Breach Exposure Report -->
+        <div id="breach-report" class="fade-in" style="animation-delay: 0.4s;"></div>
+
+        <!-- AI Security Recommendations -->
+        <div id="ai-recommendations" class="fade-in" style="animation-delay: 0.6s;"></div>
+        
+        <div style="margin: 4rem 0; text-align: center;">
+            <button onclick="location.reload()">Start New Scan</button>
+        </div>
+    </section>
+
+    <!-- Core Configuration -->
+    <script src="config.js"></script>
+
+    <!-- Utilities -->
+    <script src="js/utils/helpers.js"></script>
+    <script src="js/utils/api.js"></script>
+
+    <!-- Feature Modules -->
+    <script src="js/modules/recon.js"></script>
+    <script src="js/modules/breach.js"></script>
+    <script src="js/modules/vault-score.js"></script>
+    <script src="js/modules/ai-report.js"></script>
+
+    <!-- App Entry Point -->
+    <script src="js/app.js"></script>
+
+</body>
+</html>

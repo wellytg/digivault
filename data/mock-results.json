@@ -1,0 +1,26 @@
+{
+  "breaches": [
+    {
+      "Name": "LinkedIn",
+      "Domain": "linkedin.com",
+      "BreachDate": "2021-06-22",
+      "Description": "LinkedIn data was exposed in a massive scraping event, including emails, full names, and professional information of over 700 million users.",
+      "DataClasses": ["Email addresses", "Full names", "Geographic locations", "Job titles", "Social media profiles"]
+    },
+    {
+      "Name": "Adobe",
+      "Domain": "adobe.com",
+      "BreachDate": "2013-10-04",
+      "Description": "Adobe suffered a major security breach exposing user account data including encrypted passwords and hints.",
+      "DataClasses": ["Email addresses", "Password hints", "Passwords", "Usernames"]
+    },
+    {
+      "Name": "Canva",
+      "Domain": "canva.com",
+      "BreachDate": "2019-05-24",
+      "Description": "Canva had a data breach that exposed the data of 137 million users, including usernames, names, and email addresses.",
+      "DataClasses": ["Email addresses", "Names", "Passwords", "Usernames"]
+    }
+  ],
+  "note": "Mock data — used for demo when live APIs are unavailable or rate-limited."
+}
