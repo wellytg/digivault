@@ -7,19 +7,40 @@ const HELPERS = {
     /**
      * Constructs search and profile URLs for the recon module.
      * @param {string} name 
+     * @param {Object} handles - Optional social handles { linkedin, twitter, instagram }
      * @returns {Object}
      */
-    buildProfileUrls(name) {
+    buildProfileUrls(name, handles = {}) {
         const encodedName = encodeURIComponent(name);
         const dashName = encodeURIComponent(name.replace(/\s+/g, '-'));
         const tagName = encodeURIComponent(name.replace(/\s+/g, '')).toLowerCase();
 
         return {
             social: [
-                { platform: 'LinkedIn', url: `https://linkedin.com/search/results/people/?keywords=${encodedName}`, icon: '💼' },
-                { platform: 'Twitter/X', url: `https://twitter.com/search?q=${encodedName}`, icon: '🐦' },
-                { platform: 'Facebook', url: `https://facebook.com/search/people/?q=${encodedName}`, icon: '👥' },
-                { platform: 'Instagram', url: `https://instagram.com/explore/tags/${tagName}`, icon: '📸' }
+                { 
+                    platform: 'LinkedIn', 
+                    url: handles.linkedin ? `https://linkedin.com/in/${handles.linkedin}` : `https://linkedin.com/search/results/people/?keywords=${encodedName}`, 
+                    icon: '💼',
+                    isSearch: !handles.linkedin
+                },
+                { 
+                    platform: 'Twitter/X', 
+                    url: handles.twitter ? `https://twitter.com/${handles.twitter.replace('@', '')}` : `https://twitter.com/search?q=${encodedName}`, 
+                    icon: '🐦',
+                    isSearch: !handles.twitter
+                },
+                { 
+                    platform: 'Facebook', 
+                    url: `https://facebook.com/search/people/?q=${encodedName}`, 
+                    icon: '👥',
+                    isSearch: true
+                },
+                { 
+                    platform: 'Instagram', 
+                    url: handles.instagram ? `https://instagram.com/${handles.instagram.replace('@', '')}` : `https://instagram.com/explore/tags/${tagName}`, 
+                    icon: '📸',
+                    isSearch: !handles.instagram
+                }
             ],
             search: [
                 { platform: 'Google', url: `https://google.com/search?q="${encodedName}"`, icon: '🔍' },

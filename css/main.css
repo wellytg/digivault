@@ -123,6 +123,36 @@ button:active {
     transform: scale(0.98);
 }
 
+.advanced-toggle {
+    font-size: 0.85rem;
+    color: var(--muted);
+    cursor: pointer;
+    text-align: center;
+    margin-top: 0.5rem;
+    font-family: var(--font-mono);
+    transition: color 0.2s;
+}
+
+.advanced-toggle:hover {
+    color: var(--accent);
+}
+
+.hidden-inputs {
+    display: none;
+}
+
+#social-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    animation: fadeIn 0.3s ease-out;
+}
+
+#social-inputs:not(.hidden-inputs) {
+    display: flex;
+}
+
 /* --- Results Common --- */
 
 #results {

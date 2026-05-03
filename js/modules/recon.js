@@ -6,11 +6,12 @@
 /**
  * Executes the recon phase by building profile and search links.
  * @param {string} name 
+ * @param {Object} handles 
  * @returns {Promise<Object>}
  */
-async function runRecon(name) {
+async function runRecon(name, handles) {
     // In a real app, this might fetch metadata, but for this MVP we construct links.
-    const results = HELPERS.buildProfileUrls(name);
+    const results = HELPERS.buildProfileUrls(name, handles);
     return results;
 }
 
@@ -53,12 +54,13 @@ function renderRecon(results) {
  * @returns {string} HTML string
  */
 function renderReconCard(item) {
+    const actionLabel = item.isSearch ? "Search Profile →" : "View Profile →";
     return `
         <a href="${item.url}" target="_blank" class="recon-card">
             <span class="recon-icon">${item.icon}</span>
             <div class="recon-info">
                 <span class="recon-platform">${item.platform}</span>
-                <span class="recon-action">View Profile →</span>
+                <span class="recon-action">${actionLabel}</span>
             </div>
         </a>
     `;

@@ -20,6 +20,17 @@
         <form id="scan-form">
             <input id="input-name" type="text" placeholder="Full Name" required>
             <input id="input-email" type="email" placeholder="Email Address" required>
+            
+            <div class="advanced-toggle" onclick="document.getElementById('social-inputs').classList.toggle('hidden-inputs')">
+                + Add Social Handles (Optional)
+            </div>
+            
+            <div id="social-inputs" class="hidden-inputs">
+                <input id="handle-linkedin" type="text" placeholder="LinkedIn Username (optional)">
+                <input id="handle-twitter" type="text" placeholder="Twitter/X Handle (optional)">
+                <input id="handle-instagram" type="text" placeholder="Instagram Handle (optional)">
+            </div>
+
             <button type="submit">Run DigiScan</button>
         </form>
     </section>

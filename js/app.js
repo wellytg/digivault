@@ -20,6 +20,12 @@ async function handleScan(e) {
     const name = document.getElementById('input-name').value.trim();
     const email = document.getElementById('input-email').value.trim();
 
+    const handles = {
+        linkedin: document.getElementById('handle-linkedin').value.trim(),
+        twitter: document.getElementById('handle-twitter').value.trim(),
+        instagram: document.getElementById('handle-instagram').value.trim()
+    };
+
     if (!name || !email) {
         alert("Please enter both your name and email to start the DigiScan.");
         return;
@@ -31,7 +37,7 @@ async function handleScan(e) {
     try {
         // Step 1: Recon (Public profile links)
         updateScanStatus('Scanning public profiles and records...');
-        const reconResults = await runRecon(name);
+        const reconResults = await runRecon(name, handles);
         await delay(800); // Aesthetic delay for "realism"
 
         // Step 2: Breach check (HIBP API)
