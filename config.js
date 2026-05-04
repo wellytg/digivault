@@ -15,7 +15,7 @@ const CONFIG = {
   // === API ENDPOINTS ===
   CORS_PROXY: 'https://corsproxy.io/?',
   HIBP_BASE: 'https://haveibeenpwned.com/api/v3',
-  GEMINI_API: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:streamGenerateContent',
+  GEMINI_API: 'https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:streamGenerateContent',
 
   // === APP META ===
   APP_NAME: 'DigiVault',
