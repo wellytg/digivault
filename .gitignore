@@ -1,3 +1,17 @@
+# AI Context & Management (Gemini CLI)
+.context.md
+_manifest.md
+PROJECT_STATUS.md
+CLAUDE.md
+.docs/
+.thinking/
+.llm_history/
+visit_log.md
+._manifest_state.txt
+.gemini/
+.geminiignore
+.env
+
 # OS files
 .DS_Store
 Thumbs.db
